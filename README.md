@@ -1,6 +1,6 @@
 # MintPilot
 
-MintPilot is an AI agent console that runs an NFT collection business on BNB Chain: it monitors every collection live, prepares each night's launch by itself for the owner's approval, and tracks all revenue in one place — the exact operation its owner already runs by hand every night, turned into one app. It manages a live operation of 15 collections with 8,667 mints counted on 2026-11-13 and real paid-mint revenue already earned and swept on chain.
+MintPilot is an AI agent console that runs an NFT collection business on BNB Chain: it monitors every collection live, prepares each night's launch by itself for the owner's approval, and tracks all revenue in one place — the exact operation its owner already runs by hand every night, turned into one app. It manages a live operation of 35 collections with 15,422 mints counted on 2026-11-20 and real paid-mint revenue already earned and swept on chain.
 
 ## What it does
 
@@ -31,7 +31,7 @@ registry lives in `collections.json`.
 
 MintPilot is a new project built for **Kiroween 2026** (Devpost), category **Frankenstein** — an AI agent, smart contracts and a live ops dashboard stitched into one tool. The app, dashboard and agent layer are new work built in the submission window (30 October – 4 December 2026) using Kiro; the `/.kiro` directory at the root of this repo holds the specs and steering docs that drive the build.
 
-**Disclosure of pre-existing work:** the NFT contract template (the template-withdrawable standard) and the 15 live collections predate the hackathon. They are pre-existing assets that this new app manages, and they are disclosed as such in the submission.
+**Disclosure of pre-existing work:** the NFT contract template (the template-withdrawable standard) and the 35 live collections predate the hackathon. They are pre-existing assets that this new app manages, and they are disclosed as such in the submission.
 
 ## Licence
 

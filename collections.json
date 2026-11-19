@@ -2,7 +2,7 @@
  {
   "name": "Agent Bears",
   "symbol": "ABEAR",
-  "address": "0xb5Ee04C4aA28Cd2Bc77D29ABe30023848A23Cfff",
+  "address": "0x5017b1f2242538f0575d9f54933320fc32a174be",
   "chainId": 56,
   "source": "agent-bears"
  },
@@ -180,5 +180,61 @@
   "address": "0xad0d8ac3d61fc8ab397b7136c69fcbf1281a4998",
   "chainId": 56,
   "source": "dragon-agents"
+ },
+ {
+  "name": "Agent Cats",
+  "symbol": "ACAT",
+  "address": "0x72ddf7c603e4af0af65d8d0cc95c6ea1dc5f5cd7",
+  "chainId": 56,
+  "source": "agent-cats"
+ },
+ {
+  "name": "Gelede Agents",
+  "symbol": "GELEDE",
+  "address": "0xa06427fb1c58fe5313696630383d8a875eb2a7de",
+  "chainId": 56,
+  "source": "gelede-agents"
+ },
+ {
+  "name": "Agent Ducks",
+  "symbol": "ADUCK",
+  "address": "0xc33969d5f9686f700ddde9214fa1bad176db8d02",
+  "chainId": 56,
+  "source": "agent-ducks"
+ },
+ {
+  "name": "Ember Pepe",
+  "symbol": "EPEPE",
+  "address": "0x18d432191f1c8b43568ee37e8ba92d633bd2970d",
+  "chainId": 56,
+  "source": "ember-pepe"
+ },
+ {
+  "name": "Agent Punks",
+  "symbol": "APUNK",
+  "address": "0x3b2c00e1dfe1a1b45f93e990ffe56c5dca4670b7",
+  "chainId": 56,
+  "source": "agent-punks"
+ },
+ {
+  "name": "Agent Foxes",
+  "symbol": "AFOX",
+  "address": "0x6c89c8fd5d6cb6d8457e8cb20d01f68fda4c044e",
+  "chainId": 56,
+  "source": "agent-foxes"
+ },
+ {
+  "name": "Agent Frogs v1",
+  "symbol": "AFROG",
+  "address": "0x9c02b030f4e333d1ab87ebea44b29d8448a1d3a3",
+  "chainId": 56,
+  "source": "agent-frogs-v1"
+ },
+ {
+  "name": "Agent Dogs",
+  "symbol": "ADOG",
+  "address": "0xd8b5c9ec013371e3f467b7ad829cb962941ef0c2",
+  "chainId": 56,
+  "source": "agent-dogs"
  }
 ]
