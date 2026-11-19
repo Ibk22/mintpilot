@@ -1,0 +1,184 @@
+[
+ {
+  "name": "Agent Bears",
+  "symbol": "ABEAR",
+  "address": "0xb5Ee04C4aA28Cd2Bc77D29ABe30023848A23Cfff",
+  "chainId": 56,
+  "source": "agent-bears"
+ },
+ {
+  "name": "Agent Frogs",
+  "symbol": "AFROG",
+  "address": "0x4fEA4Ed6e70389245c41b2c9D85E8032E3C6Ce31",
+  "chainId": 56,
+  "source": "agent-frogs"
+ },
+ {
+  "name": "Agent Goats",
+  "symbol": "AGOAT",
+  "address": "0x0E9E0a3B46dC0d36A1Ab64f553Dd8A0693E6aAa6",
+  "chainId": 56,
+  "source": "agent-goats"
+ },
+ {
+  "name": "Agent Owls",
+  "symbol": "AOWL",
+  "address": "0x50B4bD215c409C975c940d5CF23B56D8F3ecfd3b",
+  "chainId": 56,
+  "source": "agent-owls"
+ },
+ {
+  "name": "仙鹤 Agents",
+  "symbol": "CRANE",
+  "address": "0xcb51e8e6db37dde38e27ba457ccf4ea2096c7117",
+  "chainId": 56,
+  "source": "prosperity-crane"
+ },
+ {
+  "name": "元宝 Agents",
+  "symbol": "YUANBAO",
+  "address": "0xe8cf9969f8e8601a5fed1dd39de0e6c7959e7f9e",
+  "chainId": 56,
+  "source": "yuanbao"
+ },
+ {
+  "name": "凤凰 Agents",
+  "symbol": "PHOENIX",
+  "address": "0x92c7d62d737e7d53a6032b5c50126f388532a306",
+  "chainId": 56,
+  "source": "phoenix"
+ },
+ {
+  "name": "富贵竹 Agents",
+  "symbol": "BAMBOO",
+  "address": "0x2F772855730aB384eD87d9b45a0aB61344c1a250",
+  "chainId": 56,
+  "source": "lucky-bamboo"
+ },
+ {
+  "name": "招财猫 Agents",
+  "symbol": "FCAT",
+  "address": "0x349d8fbed5de52a4e5065e143797d7b92846be0e",
+  "chainId": 56,
+  "source": "fortune-cats"
+ },
+ {
+  "name": "招财猫 Agents",
+  "symbol": "MANEKI",
+  "address": "0x03881f3aaebc37d611367fc1a82f23764cb98311",
+  "chainId": 56,
+  "source": "lucky-cat"
+ },
+ {
+  "name": "摇钱树 Agents",
+  "symbol": "MTREE",
+  "address": "0x61c6b4fa11c055c88a138a640c41d48b009de73a",
+  "chainId": 56,
+  "source": "money-tree"
+ },
+ {
+  "name": "旺财 Agents",
+  "symbol": "WANGCAI",
+  "address": "0x61a2ff9be3db25e23886bc59d92d44faa05959cd",
+  "chainId": 56,
+  "source": "lucky-dog"
+ },
+ {
+  "name": "玉兔 Agents",
+  "symbol": "JADE",
+  "address": "0x1b8894391a3dcfe7e248c321103265ab52e273e0",
+  "chainId": 56,
+  "source": "jade-rabbit"
+ },
+ {
+  "name": "石狮 Agents",
+  "symbol": "LION",
+  "address": "0xdddb9129c40561b0b697d2a2fc22429f04c181d6",
+  "chainId": 56,
+  "source": "guardian-lion"
+ },
+ {
+  "name": "福蝠 Agents",
+  "symbol": "FUBAT",
+  "address": "0xdb7a8fa53f96cf4744c21bb6c78a2272ec6566e5",
+  "chainId": 56,
+  "source": "fortune-bat"
+ },
+ {
+  "name": "红灯笼 Agents",
+  "symbol": "LANTERN",
+  "address": "0x33aEC2d73779e79ad6b831109d39c72248136429",
+  "chainId": 56,
+  "source": "red-lantern"
+ },
+ {
+  "name": "葫芦 Agents",
+  "symbol": "GOURD",
+  "address": "0x508cd7c962f20d8fb03a9a54cb179c628cb1c2f3",
+  "chainId": 56,
+  "source": "wealth-gourd"
+ },
+ {
+  "name": "貔貅 Agents",
+  "symbol": "PIXIU",
+  "address": "0x5777c2f59c65003ddebb018517b09f7ba0691202",
+  "chainId": 56,
+  "source": "pixiu-agents"
+ },
+ {
+  "name": "财神 Agents",
+  "symbol": "CAISHEN",
+  "address": "0x85dF79AD6df9BCa9292E73f973ECF49205E62dB8",
+  "chainId": 56,
+  "source": "caishen-agents"
+ },
+ {
+  "name": "金猪 Agents",
+  "symbol": "PIG",
+  "address": "0xa30e1482a98a5acddf8e352e2eb45fd2fe54b7d5",
+  "chainId": 56,
+  "source": "golden-pig"
+ },
+ {
+  "name": "金蟾 Agents",
+  "symbol": "JINCHAN",
+  "address": "0xfc9269a515e56a174ad32923a45868d6e97e7ee2",
+  "chainId": 56,
+  "source": "jin-chan"
+ },
+ {
+  "name": "金龟 Agents",
+  "symbol": "TURTLE",
+  "address": "0x1f37bd89349b6d14a6ef8353504c8e0dff609c6f",
+  "chainId": 56,
+  "source": "prosperity-turtle"
+ },
+ {
+  "name": "锦鲤 Agents",
+  "symbol": "JINLI",
+  "address": "0x0f45b52f80a3a42e56e66Cd8CFd1A65895c34496",
+  "chainId": 56,
+  "source": "jinli-agents"
+ },
+ {
+  "name": "马到成功 Agents",
+  "symbol": "HORSE",
+  "address": "0x28c6d26959e9f2be15d80a610acb3072250f64cd",
+  "chainId": 56,
+  "source": "money-horse"
+ },
+ {
+  "name": "麒麟 Agents",
+  "symbol": "QILIN",
+  "address": "0x8dd18307cf2477bc82609fa96566a30a393080b8",
+  "chainId": 56,
+  "source": "qilin"
+ },
+ {
+  "name": "龙 Agents",
+  "symbol": "DRAGON",
+  "address": "0xad0d8ac3d61fc8ab397b7136c69fcbf1281a4998",
+  "chainId": 56,
+  "source": "dragon-agents"
+ }
+]
