@@ -25,18 +25,29 @@
   button { background: #f0b90b; color: #111; border: 0; border-radius: 8px;
            padding: 8px 14px; font-weight: 600; cursor: pointer; }
   button:disabled { opacity: .55; cursor: default; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
-  .card { background: #131826; border: 1px solid #232a3d; border-radius: 12px; padding: 16px; }
-  .card h2 { margin: 0 0 2px; font-size: 16px; }
-  .card .sym { color: #f0b90b; font-size: 12px; font-weight: 700; letter-spacing: .06em; }
-  .card .addr { color: #8b93a5; font-size: 12px; font-family: ui-monospace, monospace; margin: 6px 0 12px; }
-  .card .addr a { color: #8b93a5; text-decoration: none; }
-  .card .addr a:hover { color: #f0b90b; }
-  .row { display: flex; justify-content: space-between; font-size: 14px; padding: 3px 0; }
-  .row .k { color: #8b93a5; }
-  .row .v { font-weight: 600; }
-  .err { color: #e5534b; font-size: 12px; margin-top: 8px; }
-  .empty { color: #8b93a5; padding: 30px 0; }
+  .panel { background: #131826; border: 1px solid #232a3d; border-radius: 12px;
+           padding: 16px 18px; margin: 6px 0 18px; }
+  .panel h2 { margin: 0 0 6px; font-size: 17px; }
+  .panel .note { color: #8b93a5; font-size: 13px; line-height: 1.55; margin: 4px 0; }
+  .panel .split { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 10px; font-size: 14px; }
+  .panel .split .k { color: #8b93a5; }
+  .panel .split .v { font-weight: 650; }
+  .tablewrap { overflow-x: auto; border: 1px solid #232a3d; border-radius: 12px; background: #131826; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 760px; }
+  th, td { padding: 10px 14px; text-align: right; white-space: nowrap; }
+  th { color: #8b93a5; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;
+       border-bottom: 1px solid #232a3d; }
+  td { border-bottom: 1px solid #1a2030; }
+  tr:last-child td { border-bottom: 0; }
+  th:first-child, td:first-child { text-align: left; }
+  .cname { font-weight: 600; }
+  .sym { color: #f0b90b; font-size: 11px; font-weight: 700; letter-spacing: .06em; margin-left: 6px; }
+  .addr { color: #8b93a5; font-size: 12px; font-family: ui-monospace, monospace; }
+  .addr a { color: #8b93a5; text-decoration: none; }
+  .addr a:hover { color: #f0b90b; }
+  .err { color: #e5534b; font-size: 12px; }
+  .empty { color: #8b93a5; padding: 30px 14px; }
+  .foot { color: #8b93a5; font-size: 12.5px; line-height: 1.55; margin-top: 14px; }
 </style>
 </head>
 <body>
@@ -48,6 +59,7 @@
 <section class="totals">
   <div class="stat"><div class="label">Collections</div><div class="value" id="t-collections">—</div></div>
   <div class="stat"><div class="label">Total minted</div><div class="value" id="t-minted">—</div></div>
+  <div class="stat"><div class="label">Est. mint revenue</div><div class="value" id="t-revenue">—</div></div>
   <div class="stat"><div class="label">Waiting in contracts</div><div class="value" id="t-balance">—</div></div>
   <div class="stat"><div class="label">BNB price</div><div class="value" id="t-price">—</div></div>
 </section>
@@ -57,7 +69,42 @@
     <div class="updated" id="updated">Loading live data…</div>
     <button id="refresh">Refresh</button>
   </div>
-  <div class="grid" id="grid"><div class="empty">Reading the chain…</div></div>
+
+  <section class="panel" id="revenue-panel">
+    <h2>Revenue</h2>
+    <p class="note">Estimated lifetime mint revenue, derived on chain: paid mints
+      (total minted minus the free first mints each contract reports) multiplied by the
+      contract's current mint price. Mint revenue is swept out of the contracts by
+      <i>withdraw()</i>, so this is a lifetime estimate, not a balance. Secondary-sale
+      royalties are paid by marketplaces straight to the payout address and are not counted.
+      Collections whose contracts do not expose the price and free-mint counters show
+      “n/a” and are left out of the totals.</p>
+    <div class="split">
+      <span><span class="k">Estimated revenue </span><span class="v" id="r-total">—</span></span>
+      <span><span class="k">Paid mints </span><span class="v" id="r-paid">—</span></span>
+      <span><span class="k">Free mints </span><span class="v" id="r-free">—</span></span>
+      <span><span class="k">Waiting in contracts </span><span class="v" id="r-waiting">—</span></span>
+      <span><span class="k">Revenue readable for </span><span class="v" id="r-known">—</span></span>
+    </div>
+  </section>
+
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Collection</th>
+          <th>Minted</th>
+          <th title="Mint events over the trailing 7 days, divided by 7">Velocity (mints/day, 7d)</th>
+          <th>Paid mints</th>
+          <th>Mint price</th>
+          <th>Est. revenue</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody id="rows"><tr><td colspan="7" class="empty">Reading the chain…</td></tr></tbody>
+    </table>
+  </div>
+  <p class="foot" id="velocity-note"></p>
 </main>
 
 <script>
@@ -65,6 +112,7 @@ const $ = (id) => document.getElementById(id);
 const short = (a) => a.slice(0, 6) + '…' + a.slice(-4);
 const fmt = (n) => n === null || n === undefined ? '—' : n.toLocaleString('en-US');
 const fmtBnb = (n) => n === null || n === undefined ? '—' : n.toFixed(6) + ' BNB';
+const fmtVel = (n) => n === null || n === undefined ? 'n/a' : n.toFixed(1);
 
 async function load() {
   const btn = $('refresh');
@@ -73,24 +121,39 @@ async function load() {
     const res = await fetch('/api/collections');
     const data = await res.json();
     if (data.error) throw new Error(data.error);
-    $('t-collections').textContent = fmt(data.totals.collections);
-    $('t-minted').textContent = fmt(data.totals.minted);
-    $('t-balance').textContent = fmtBnb(data.totals.balanceBnb) +
-      (data.totals.balanceUsd !== null && data.totals.balanceUsd !== undefined
-        ? '  (≈ $' + data.totals.balanceUsd.toFixed(2) + ')' : '');
+    const t = data.totals;
+    $('t-collections').textContent = fmt(t.collections);
+    $('t-minted').textContent = fmt(t.minted);
+    $('t-revenue').textContent = fmtBnb(t.estRevenueBnb) +
+      (t.estRevenueUsd !== null && t.estRevenueUsd !== undefined ? '  (≈ $' + t.estRevenueUsd.toFixed(2) + ')' : '');
+    $('t-balance').textContent = fmtBnb(t.balanceBnb) +
+      (t.balanceUsd !== null && t.balanceUsd !== undefined ? '  (≈ $' + t.balanceUsd.toFixed(2) + ')' : '');
     $('t-price').textContent = data.bnbUsd ? '$' + data.bnbUsd.toLocaleString('en-US', { maximumFractionDigits: 2 }) : '—';
+    $('r-total').textContent = fmtBnb(t.estRevenueBnb) +
+      (t.estRevenueUsd !== null && t.estRevenueUsd !== undefined ? ' (≈ $' + t.estRevenueUsd.toFixed(2) + ')' : '');
+    $('r-paid').textContent = fmt(t.paidMints);
+    $('r-free').textContent = fmt(t.freeMints);
+    $('r-waiting').textContent = fmtBnb(t.balanceBnb);
+    $('r-known').textContent = fmt(t.revenueKnown) + ' of ' + fmt(t.collections) + ' collections';
     $('updated').textContent = 'Updated ' + new Date(data.updatedAt).toLocaleTimeString() + ' · auto-refreshes every 60s';
-    $('grid').innerHTML = data.collections.map((c) => `
-      <div class="card">
-        <h2>${escapeHtml(c.name)}</h2>
-        <div class="sym">${escapeHtml(c.symbol || '')}</div>
-        <div class="addr" title="${c.address}">
-          <a href="https://bscscan.com/address/${c.address}" target="_blank" rel="noopener">${short(c.address)}</a>
-        </div>
-        <div class="row"><span class="k">Minted</span><span class="v">${fmt(c.minted)}</span></div>
-        <div class="row"><span class="k">Balance</span><span class="v">${fmtBnb(c.balanceBnb)}</span></div>
-        ${c.ok ? '' : '<div class="err">Live read failed for this contract — showing what we have.</div>'}
-      </div>`).join('');
+    $('velocity-note').textContent = data.velocityAvailable
+      ? 'Velocity counts mint events (ERC-721 transfers from the zero address) over the trailing ' + data.velocityWindowDays + ' days, divided by ' + data.velocityWindowDays + '.'
+      : 'Mint velocity is unavailable right now: the RPC endpoint in use does not serve eth_getLogs, so recent mint events cannot be counted. No number is shown rather than a guessed one. Point BSC_RPC at a log-capable endpoint to enable it.';
+    const rows = [...data.collections].sort((a, b) => (b.minted || 0) - (a.minted || 0));
+    $('rows').innerHTML = rows.map((c) => `
+      <tr>
+        <td>
+          <span class="cname">${escapeHtml(c.name)}</span><span class="sym">${escapeHtml(c.symbol || '')}</span><br>
+          <span class="addr" title="${c.address}"><a href="https://bscscan.com/address/${c.address}" target="_blank" rel="noopener">${short(c.address)}</a></span>
+          ${c.ok ? '' : '<div class="err">Live read failed for this contract.</div>'}
+        </td>
+        <td>${fmt(c.minted)}</td>
+        <td>${fmtVel(c.velocityPerDay)}</td>
+        <td>${c.paidMints === null || c.paidMints === undefined ? 'n/a' : fmt(c.paidMints)}</td>
+        <td>${c.priceBnb === null || c.priceBnb === undefined ? 'n/a' : fmtBnb(c.priceBnb)}</td>
+        <td>${c.estRevenueBnb === null || c.estRevenueBnb === undefined ? 'n/a' : fmtBnb(c.estRevenueBnb)}</td>
+        <td>${fmtBnb(c.balanceBnb)}</td>
+      </tr>`).join('');
   } catch (e) {
     $('updated').textContent = 'Could not load live data: ' + e.message;
   } finally {

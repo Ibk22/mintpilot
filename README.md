@@ -4,7 +4,7 @@ MintPilot is an AI agent console that runs an NFT collection business on BNB Cha
 
 ## What it does
 
-1. **Live dashboard** — every collection's minted count, contract balance and mint velocity, read live from BSC, with a revenue panel showing what is waiting in each contract.
+1. **Live dashboard** — every collection's minted count, contract balance and mint velocity (mint events over the trailing 7 days, per day), read live from BSC, with a revenue panel showing what is waiting in each contract plus estimated lifetime mint revenue derived on chain (paid mints × current mint price).
 2. **Launch wizard + agent loop** — the agent prepares tonight's launch package by itself: theme from the queue, pixel art, metadata, initcode and the predicted CREATE2 address, presented for one approval. In judge mode the same flow deploys for real on BSC testnet. On mainnet, broadcasting stays in the owner's Binance wallet flow — the app prepares, the wallet signs.
 3. **Insights feed** — plain-language notes from the agent (for example, "Dragon is minting twice as fast as Pixiu", "0.0008 BNB is waiting in Pixiu"). Rule-based for v1.
 
@@ -18,8 +18,11 @@ Then open http://localhost:4173. No dependencies and no build step — plain
 Node (18+). The server reads every number live from BNB Chain at request
 time (raw JSON-RPC against a public BSC endpoint) and never signs or sends
 anything. Optional environment variables: `PORT` (default 4173) and
-`BSC_RPC` (default https://bsc-dataseed.binance.org). The collection
-registry lives in `collections.json`.
+`BSC_RPC` (default https://bsc-dataseed.binance.org). Mint velocity is
+counted from on-chain mint events via `eth_getLogs`; the default public
+endpoint refuses log queries, so velocity shows as unavailable unless
+`BSC_RPC` points at a log-capable endpoint. The collection registry lives
+in `collections.json`.
 
 ## Deliberately out of scope
 
